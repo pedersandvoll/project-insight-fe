@@ -1,11 +1,47 @@
-# React + TypeScript + Vite
+# Project Insight
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A project management and analytics dashboard built with React, TypeScript, and Material-UI.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+pnpm install
+```
+
+### Development
+
+Start the development server:
+```bash
+pnpm dev
+```
+
+The application will be available at `http://localhost:5173`
+
+### Building for Production
+
+```bash
+pnpm build
+```
+
+### Linting
+
+```bash
+pnpm lint
+```
+
+### Preview Production Build
+
+```bash
+pnpm preview
+```
 
 ## Expanding the ESLint configuration
 
