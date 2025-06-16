@@ -1,5 +1,6 @@
 import type { ProjectStatus } from "../enums/projectStatus";
 import type { ProjectSearchFormSchema } from "../routes/projects";
+import type { AssignUserToProjectFormSchema } from "../schemas/project";
 import type { ProjectDashboardDTO, ProjectDTO } from "../types/api";
 import { apiFetch, createHeaders } from "./client";
 
@@ -66,7 +67,23 @@ export async function updateProjectStatus(
     `project/status/${projectId}`,
     {
       method: "PATCH",
-      body: JSON.stringify(status),
+      body: JSON.stringify({ status: status }),
+      headers: createHeaders(),
+    },
+  );
+
+  return responseData;
+}
+
+export async function postAssignUserToProject(
+  projectId: string,
+  model: AssignUserToProjectFormSchema,
+) {
+  const responseData = await apiFetch<ProjectDTO>(
+    `project/assign/${projectId}`,
+    {
+      method: "POST",
+      body: JSON.stringify(model),
       headers: createHeaders(),
     },
   );

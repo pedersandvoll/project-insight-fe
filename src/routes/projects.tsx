@@ -253,6 +253,13 @@ function ProjectsPage() {
               <TableBody>
                 {data.map((row) => (
                   <TableRow
+                    hover
+                    onClick={() =>
+                      navigate({
+                        to: "/$projectId",
+                        params: { projectId: row.ID },
+                      })
+                    }
                     key={row.ID}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >

@@ -1,6 +1,7 @@
 import {
   keepPreviousData,
   queryOptions,
+  useMutation,
   useQuery,
 } from "@tanstack/react-query";
 import type { ProjectDashboardDTO, ProjectDTO } from "../types/api";
@@ -8,8 +9,12 @@ import {
   getProjectById,
   getProjectDashboard,
   getProjects,
+  postAssignUserToProject,
+  updateProjectStatus,
 } from "../api/project";
 import type { ProjectSearchFormSchema } from "../routes/projects";
+import type { ProjectStatus } from "../enums/projectStatus";
+import type { AssignUserToProjectFormSchema } from "../schemas/project";
 
 export const useGetProjectDashboard = () => {
   return useQuery({
@@ -36,4 +41,26 @@ export const useGetProjectByIdOptions = (projectId: string) => {
 
 export const useGetProjectById = (projectId: string) => {
   return useQuery(useGetProjectByIdOptions(projectId));
+};
+
+export const useUpdateProjectStatus = (onSuccess: () => void) => {
+  return useMutation({
+    mutationFn: (model: {
+      projectId: string;
+      status: ProjectStatus;
+    }): Promise<ProjectDTO> =>
+      updateProjectStatus(model.projectId, model.status),
+    onSuccess: () => onSuccess(),
+  });
+};
+
+export const usePostAssignUserToProject = (onSuccess: () => void) => {
+  return useMutation({
+    mutationFn: (model: {
+      projectId: string;
+      form: AssignUserToProjectFormSchema;
+    }): Promise<ProjectDTO> =>
+      postAssignUserToProject(model.projectId, model.form),
+    onSuccess: () => onSuccess(),
+  });
 };
