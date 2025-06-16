@@ -1,0 +1,75 @@
+import type { ProjectStatus } from "../enums/projectStatus";
+import type { ProjectSearchFormSchema } from "../routes/projects";
+import type { ProjectDashboardDTO, ProjectDTO } from "../types/api";
+import { apiFetch, createHeaders } from "./client";
+
+const addParam = (params: URLSearchParams, key: string, value: string) => {
+  if (value) {
+    params.append(key, value);
+  }
+};
+
+const addArrayParam = (
+  params: URLSearchParams,
+  key: string,
+  values: string[],
+) => {
+  values.forEach((value) => {
+    params.append(key, value);
+  });
+};
+
+export async function getProjectDashboard() {
+  const responseData = await apiFetch<ProjectDashboardDTO>(
+    "project/dashboard",
+    {
+      method: "GET",
+      headers: createHeaders(),
+    },
+  );
+
+  return responseData;
+}
+
+export async function getProjects(filters: ProjectSearchFormSchema) {
+  const params = new URLSearchParams();
+
+  addArrayParam(params, "status", filters.status);
+  addParam(params, "name", filters.name);
+  addParam(params, "createdBy", filters.createdBy);
+  addParam(params, "associated", filters.associated);
+
+  const endpoint = `project?${params.toString()}`;
+
+  const responseData = await apiFetch<ProjectDTO[]>(endpoint, {
+    method: "GET",
+    headers: createHeaders(),
+  });
+
+  return responseData;
+}
+
+export async function getProjectById(projectId: string) {
+  const responseData = await apiFetch<ProjectDTO>(`project/${projectId}`, {
+    method: "GET",
+    headers: createHeaders(),
+  });
+
+  return responseData;
+}
+
+export async function updateProjectStatus(
+  projectId: string,
+  status: ProjectStatus,
+) {
+  const responseData = await apiFetch<ProjectDTO>(
+    `project/status/${projectId}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify(status),
+      headers: createHeaders(),
+    },
+  );
+
+  return responseData;
+}
