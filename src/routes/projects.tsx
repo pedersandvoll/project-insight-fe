@@ -183,6 +183,7 @@ function ProjectsPage() {
                         ...prev,
                         createdBy: newValue ? newValue.ID : "",
                       }),
+                      replace: true,
                     });
                   }}
                   sx={{ width: 150 }}
@@ -207,6 +208,7 @@ function ProjectsPage() {
                         ...prev,
                         associated: newValue ? newValue.ID : "",
                       }),
+                      replace: true,
                     });
                   }}
                   sx={{ width: 150 }}
@@ -220,14 +222,11 @@ function ProjectsPage() {
               <Button
                 onClick={() =>
                   navigate({
-                    to: "/projects",
-                    search: {
-                      status: status,
-                      name: name,
-                      createdBy: createdBy,
-                      associated: associated,
+                    search: (prev) => ({
+                      ...prev,
                       newProject: true,
-                    },
+                    }),
+                    replace: true,
                   })
                 }
                 variant="outlined"
@@ -244,14 +243,11 @@ function ProjectsPage() {
             open={newProject}
             onClose={() =>
               navigate({
-                to: "/projects",
-                search: {
-                  status: status,
-                  name: name,
-                  createdBy: createdBy,
-                  associated: associated,
+                search: (prev) => ({
+                  ...prev,
                   newProject: false,
-                },
+                }),
+                replace: true,
               })
             }
             maxWidth="sm"

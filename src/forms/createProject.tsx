@@ -33,7 +33,10 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
   const navigate = useNavigate();
   const { mutateAsync, isPending } = usePostProject(() => {
     refetch();
-    navigate({ to: "/projects", search: { newProject: false } });
+    navigate({
+      to: "/projects",
+      search: (prev) => ({ ...prev, newProject: false }),
+    });
   });
   const form = useForm({
     defaultValues: {
@@ -151,7 +154,7 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
               onCancel={() =>
                 navigate({
                   to: "/projects",
-                  search: { newProject: false },
+                  search: (prev) => ({ ...prev, newProject: false }),
                 })
               }
               isLoading={isPending}
