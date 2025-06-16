@@ -1,4 +1,5 @@
 import type { ProjectStatus } from "../enums/projectStatus";
+import type { UserRole } from "../enums/userRole";
 
 interface BaseDTO {
   ID: string;
@@ -51,9 +52,9 @@ export interface BudgetDTO extends BaseDTO {
   BudgetUsed: number;
 }
 
-interface AssociatedUserDTO {
+interface AssociatedUserDTO extends BaseDTO {
   ProjectID: string;
   UserID: string;
   User: UserDTO;
-  Role: number;
+  Role: UserRole;
 }
