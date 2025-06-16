@@ -10,11 +10,15 @@ import {
   getProjectDashboard,
   getProjects,
   postAssignUserToProject,
+  postProject,
   updateProjectStatus,
 } from "../api/project";
 import type { ProjectSearchFormSchema } from "../routes/projects";
 import type { ProjectStatus } from "../enums/projectStatus";
-import type { AssignUserToProjectFormSchema } from "../schemas/project";
+import type {
+  AssignUserToProjectFormSchema,
+  NewProjectFormSchema,
+} from "../schemas/project";
 
 export const useGetProjectDashboard = () => {
   return useQuery({
@@ -61,6 +65,15 @@ export const usePostAssignUserToProject = (onSuccess: () => void) => {
       form: AssignUserToProjectFormSchema;
     }): Promise<ProjectDTO> =>
       postAssignUserToProject(model.projectId, model.form),
+    onSuccess: () => onSuccess(),
+  });
+};
+
+export const usePostProject = (onSuccess: () => void) => {
+  return useMutation({
+    mutationFn: (
+      model: NewProjectFormSchema,
+    ): Promise<{ message: string; budgetId: string }> => postProject(model),
     onSuccess: () => onSuccess(),
   });
 };

@@ -5,10 +5,14 @@ import {
   Autocomplete,
   Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Chip,
   CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   FormControl,
   Grid,
   InputLabel,
@@ -32,12 +36,14 @@ import { ProjectStatus } from "../enums/projectStatus";
 import { useGetUsers } from "../hooks/user.api";
 import { useForm } from "@tanstack/react-form";
 import { type ProjectNameSearchFormSchema } from "../schemas/project";
+import CreateProjectForm from "../forms/createProject";
 
 const projectsSearchSchema = z.object({
   status: fallback(z.array(z.string()), []).default([]),
   name: fallback(z.string(), "").default(""),
   createdBy: fallback(z.string(), "").default(""),
   associated: fallback(z.string(), "").default(""),
+  newProject: fallback(z.boolean(), false).default(false),
 });
 
 export type ProjectSearchFormSchema = z.infer<typeof projectsSearchSchema>;
@@ -50,7 +56,7 @@ export const Route = createFileRoute({
 function ProjectsPage() {
   const theme = useTheme();
   const navigate = Route.useNavigate();
-  const { status, name, createdBy, associated } = Route.useSearch();
+  const { status, name, createdBy, associated, newProject } = Route.useSearch();
   const form = useForm({
     defaultValues: {
       name: name,
@@ -68,7 +74,7 @@ function ProjectsPage() {
     },
     asyncDebounceMs: 500,
   });
-  const { data, isLoading } = useGetProjects({
+  const { data, isLoading, refetch } = useGetProjects({
     status,
     name,
     createdBy,
@@ -210,7 +216,53 @@ function ProjectsPage() {
                 />
               </Grid>
             )}
+            <Grid>
+              <Button
+                onClick={() =>
+                  navigate({
+                    to: "/projects",
+                    search: {
+                      status: status,
+                      name: name,
+                      createdBy: createdBy,
+                      associated: associated,
+                      newProject: true,
+                    },
+                  })
+                }
+                variant="outlined"
+                sx={{
+                  height: "56px",
+                  textTransform: "none",
+                }}
+              >
+                Create new project
+              </Button>
+            </Grid>
           </Grid>
+          <Dialog
+            open={newProject}
+            onClose={() =>
+              navigate({
+                to: "/projects",
+                search: {
+                  status: status,
+                  name: name,
+                  createdBy: createdBy,
+                  associated: associated,
+                  newProject: false,
+                },
+              })
+            }
+            maxWidth="sm"
+            fullWidth
+          >
+            <DialogTitle>Create new project</DialogTitle>
+            <DialogContent>
+              <CreateProjectForm refetch={refetch} />
+            </DialogContent>
+          </Dialog>
+
           <TableContainer
             sx={{
               backgroundColor: "white",

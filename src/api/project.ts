@@ -1,6 +1,9 @@
 import type { ProjectStatus } from "../enums/projectStatus";
 import type { ProjectSearchFormSchema } from "../routes/projects";
-import type { AssignUserToProjectFormSchema } from "../schemas/project";
+import type {
+  AssignUserToProjectFormSchema,
+  NewProjectFormSchema,
+} from "../schemas/project";
 import type { ProjectDashboardDTO, ProjectDTO } from "../types/api";
 import { apiFetch, createHeaders } from "./client";
 
@@ -81,6 +84,19 @@ export async function postAssignUserToProject(
 ) {
   const responseData = await apiFetch<ProjectDTO>(
     `project/assign/${projectId}`,
+    {
+      method: "POST",
+      body: JSON.stringify(model),
+      headers: createHeaders(),
+    },
+  );
+
+  return responseData;
+}
+
+export async function postProject(model: NewProjectFormSchema) {
+  const responseData = await apiFetch<{ message: string; budgetId: string }>(
+    "project/create",
     {
       method: "POST",
       body: JSON.stringify(model),

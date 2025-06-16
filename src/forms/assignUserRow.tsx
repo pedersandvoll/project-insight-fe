@@ -84,14 +84,6 @@ export default function AssignUserForm(props: AssignUserFormProps) {
               onChange={(_, newValue) =>
                 newValue && field.handleChange(newValue.ID)
               }
-              // onChange={(_, newValue) => {
-              //   navigate({
-              //     search: (prev) => ({
-              //       ...prev,
-              //       createdBy: newValue ? newValue.ID : "",
-              //     }),
-              //   });
-              // }}
               renderInput={(params) => (
                 <TextField {...params} label="Assign user" />
               )}
