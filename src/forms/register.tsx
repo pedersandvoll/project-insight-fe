@@ -34,15 +34,25 @@ export default function RegisterForm() {
       <Stack
         gap={2}
         sx={{
-          padding: "20px",
+          padding: { xs: "16px", sm: "20px", md: "24px" },
           backgroundColor: "#F5F5F5",
           width: "100%",
-          minWidth: "300px",
-          maxWidth: "600px",
+          minWidth: { xs: "280px", sm: "320px" },
+          maxWidth: { xs: "90vw", sm: "400px", md: "500px" },
           borderRadius: "8px",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
         }}
       >
-        <Typography variant="h4">Register</Typography>
+        <Typography 
+          variant="h4" 
+          sx={{
+            fontSize: { xs: "1.75rem", sm: "2rem", md: "2.125rem" },
+            textAlign: "center",
+            mb: 1
+          }}
+        >
+          Register
+        </Typography>
         <form.Field
           name="email"
           children={(field) => (
@@ -62,7 +72,10 @@ export default function RegisterForm() {
                   field.state.meta.errors[0]?.message
                 }
                 type="email"
-                sx={{ minWidth: "400px" }}
+                sx={{ 
+                  minWidth: { xs: "auto", sm: "300px", md: "350px" },
+                  width: "100%"
+                }}
                 inputProps={{ "aria-label": "Enter your email address" }}
               />
             </>
@@ -82,7 +95,10 @@ export default function RegisterForm() {
                 field.state.meta.isTouched &&
                 field.state.meta.errors[0]?.message
               }
-              sx={{ minWidth: "400px" }}
+              sx={{ 
+                minWidth: { xs: "auto", sm: "300px", md: "350px" },
+                width: "100%"
+              }}
               inputProps={{ "aria-label": "Enter your first name" }}
             />
           )}
@@ -101,7 +117,10 @@ export default function RegisterForm() {
                 field.state.meta.isTouched &&
                 field.state.meta.errors[0]?.message
               }
-              sx={{ minWidth: "400px" }}
+              sx={{ 
+                minWidth: { xs: "auto", sm: "300px", md: "350px" },
+                width: "100%"
+              }}
               inputProps={{ "aria-label": "Enter your last name" }}
             />
           )}
@@ -121,7 +140,10 @@ export default function RegisterForm() {
                 field.state.meta.errors[0]?.message
               }
               type="password"
-              sx={{ minWidth: "400px" }}
+              sx={{ 
+                minWidth: { xs: "auto", sm: "300px", md: "350px" },
+                width: "100%"
+              }}
               inputProps={{ "aria-label": "Enter your password" }}
             />
           )}
@@ -143,8 +165,14 @@ export default function RegisterForm() {
             </Button>
           )}
         />
-        <Stack direction="row" alignItems="center" justifyContent="center">
-          <Typography>Already have an account?</Typography>
+        <Stack 
+          direction={{ xs: "column", sm: "row" }} 
+          alignItems="center" 
+          justifyContent="center"
+          spacing={{ xs: 1, sm: 0 }}
+          sx={{ textAlign: "center" }}
+        >
+          <Typography sx={{ fontSize: { xs: "0.875rem", sm: "1rem" } }}>Already have an account?</Typography>
           <Button
             sx={{ textTransform: "none" }}
             onClick={() => navigate({ to: "/login" })}

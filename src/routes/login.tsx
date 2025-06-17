@@ -17,6 +17,7 @@ function Login() {
         minHeight: "100vh",
         background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         position: "relative",
+        padding: { xs: 2, sm: 3 },
         "&::before": {
           content: '""',
           position: "absolute",

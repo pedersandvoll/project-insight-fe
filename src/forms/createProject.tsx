@@ -83,7 +83,6 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
                 field.state.meta.isTouched &&
                 field.state.meta.errors[0]?.message
               }
-              sx={{ minWidth: "400px" }}
               inputProps={{ "aria-label": "Enter project name" }}
             />
           )}
@@ -105,7 +104,6 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
                 field.state.meta.isTouched &&
                 field.state.meta.errors[0]?.message
               }
-              sx={{ minWidth: "400px" }}
               inputProps={{ "aria-label": "Enter project description" }}
             />
           )}
@@ -149,7 +147,6 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
                 field.state.meta.errors[0]?.message
               }
               type="number"
-              sx={{ minWidth: "400px" }}
               inputProps={{ "aria-label": "Enter estimated project cost" }}
             />
           )}
