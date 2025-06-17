@@ -39,7 +39,7 @@ export default function LoginForm() {
           borderRadius: "8px",
         }}
       >
-        <Typography variant="h4">Logg inn</Typography>
+        <Typography variant="h4">Login</Typography>
         <form.Field
           name="email"
           children={(field) => (
@@ -47,7 +47,7 @@ export default function LoginForm() {
               autoFocus
               fullWidth
               variant="filled"
-              label="E-post"
+              label="Email"
               onChange={(e) => field.handleChange(e.target.value)}
               value={field.state.value}
               error={!!field.state.meta.errors[0]}
@@ -63,7 +63,7 @@ export default function LoginForm() {
             <TextField
               fullWidth
               variant="filled"
-              label="Passord"
+              label="Password"
               onChange={(e) => field.handleChange(e.target.value)}
               value={field.state.value}
               error={field.state.meta.isTouched && !!field.state.meta.errors[0]}
@@ -84,15 +84,19 @@ export default function LoginForm() {
               disabled={!canSubmit}
               variant="contained"
               fullWidth
+              sx={{ textTransform: "none" }}
             >
-              {isSubmitting ? "..." : "Logg inn"}
+              {isSubmitting ? "..." : "Login"}
             </Button>
           )}
         />
         <Stack direction="row" alignItems="center" justifyContent="center">
-          <Typography>Har du ikke en konto?</Typography>
-          <Button onClick={() => navigate({ to: "/register" })}>
-            Registrer
+          <Typography>Don't have an account?</Typography>
+          <Button
+            sx={{ textTransform: "none" }}
+            onClick={() => navigate({ to: "/register" })}
+          >
+            Register
           </Button>
         </Stack>
       </Stack>

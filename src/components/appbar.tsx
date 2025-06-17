@@ -73,7 +73,10 @@ export const Appbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleLogout}>Logg ut</MenuItem>
+              <MenuItem onClick={() => navigate({ to: "/users" })}>
+                Users
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </>
         )}
