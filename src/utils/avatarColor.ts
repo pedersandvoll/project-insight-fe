@@ -17,10 +17,24 @@ function stringToColor(string: string) {
 }
 
 export function stringAvatar(name: string) {
+  const nameParts = name
+    .trim()
+    .split(/\s+/)
+    .filter((part) => part.length > 0);
+
+  let initials = "";
+  if (nameParts.length >= 2) {
+    initials = `${nameParts[0][0]}${nameParts[1][0]}`;
+  } else if (nameParts.length === 1) {
+    initials = nameParts[0][0];
+  } else {
+    initials = "?";
+  }
+
   return {
     sx: {
       bgcolor: stringToColor(name),
     },
-    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    children: initials.toUpperCase(),
   };
 }
