@@ -27,6 +27,7 @@ export default function LoginForm() {
         e.stopPropagation();
         form.handleSubmit();
       }}
+      aria-label="Login form"
     >
       <Stack
         gap={2}
@@ -54,6 +55,7 @@ export default function LoginForm() {
               helperText={field.state.meta.errors[0]?.message}
               type="email"
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter your email address" }}
             />
           )}
         />
@@ -73,6 +75,7 @@ export default function LoginForm() {
               }
               type="password"
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter your password" }}
             />
           )}
         />
@@ -85,6 +88,7 @@ export default function LoginForm() {
               variant="contained"
               fullWidth
               sx={{ textTransform: "none" }}
+              aria-label={isSubmitting ? "Logging in" : "Login to your account"}
             >
               {isSubmitting ? "..." : "Login"}
             </Button>
@@ -95,6 +99,7 @@ export default function LoginForm() {
           <Button
             sx={{ textTransform: "none" }}
             onClick={() => navigate({ to: "/register" })}
+            aria-label="Navigate to register page"
           >
             Register
           </Button>

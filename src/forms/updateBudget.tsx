@@ -5,7 +5,7 @@ import {
   type UpdateBudgetFormSchema,
 } from "../schemas/budget";
 import { usePostProjectUpdate } from "../hooks/budget.api";
-import { Stack, TextField, Typography, Box, Divider } from "@mui/material";
+import { Stack, TextField, Typography, Box } from "@mui/material";
 import { formatToCurrency } from "../utils/formatToCurrency";
 import { FormActions } from "../components/formActions";
 import type {
@@ -53,6 +53,7 @@ export default function BudgetForm(props: BudgetFormProps) {
         e.stopPropagation();
         form.handleSubmit();
       }}
+      aria-label="Update project budget form"
     >
       <Stack
         gap={2}
@@ -86,8 +87,13 @@ export default function BudgetForm(props: BudgetFormProps) {
                     field.state.meta.errors[0]?.message
                   }
                   sx={{ maxWidth: "300px" }}
+                  inputProps={{ "aria-label": "Enter budget amount to add" }}
                 />
-                <Box sx={{ p: 2, bgcolor: "grey.100", borderRadius: 1 }}>
+                <Box
+                  sx={{ p: 2, bgcolor: "grey.100", borderRadius: 1 }}
+                  role="region"
+                  aria-label="Budget preview information"
+                >
                   <Typography variant="body2" sx={{ mb: 1 }}>
                     Budget Preview:
                   </Typography>

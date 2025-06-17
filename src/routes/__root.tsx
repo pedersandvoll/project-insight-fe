@@ -27,7 +27,7 @@ function RootLayout(): ReactElement {
         </Box>
       )}
       <Outlet />
-      <TanStackRouterDevtools />
+      {import.meta.env.DEV && <TanStackRouterDevtools />}
     </>
   );
 }

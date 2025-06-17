@@ -13,6 +13,5 @@ export default defineConfig({
       verboseFileRoutes: false,
     }),
     react(),
-    // ...,
   ],
 });

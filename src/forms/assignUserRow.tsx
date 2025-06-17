@@ -4,7 +4,7 @@ import type {
 } from "@tanstack/react-query";
 import type { ProjectDTO, UserDTO } from "../types/api";
 import { useNavigate } from "@tanstack/react-router";
-import { Field, useForm } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { usePostAssignUserToProject } from "../hooks/project.api";
 import {
   assignUserToProjectSchema,
@@ -63,13 +63,9 @@ export default function AssignUserForm(props: AssignUserFormProps) {
         e.stopPropagation();
         form.handleSubmit();
       }}
+      aria-label="Assign user to project form"
     >
-      <Stack
-        gap={2}
-        sx={{
-          borderRadius: "8px",
-        }}
-      >
+      <Stack gap={2}>
         <form.Field
           name="userId"
           children={(field) => (
@@ -85,8 +81,16 @@ export default function AssignUserForm(props: AssignUserFormProps) {
                 newValue && field.handleChange(newValue.ID)
               }
               renderInput={(params) => (
-                <TextField {...params} label="Assign user" />
+                <TextField
+                  {...params}
+                  label="Assign user"
+                  inputProps={{
+                    ...params.inputProps,
+                    "aria-label": "Search and select user to assign",
+                  }}
+                />
               )}
+              sx={{ marginTop: "5px" }}
             />
           )}
         />
@@ -100,6 +104,7 @@ export default function AssignUserForm(props: AssignUserFormProps) {
                 size="medium"
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
+                inputProps={{ "aria-label": "Select user role for project" }}
               >
                 {Object.values(UserRole)
                   .filter((value) => typeof value === "number")

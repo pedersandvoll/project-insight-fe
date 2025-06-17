@@ -60,6 +60,7 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
         e.stopPropagation();
         form.handleSubmit();
       }}
+      aria-label="Create new project form"
     >
       <Stack
         gap={2}
@@ -83,6 +84,7 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
                 field.state.meta.errors[0]?.message
               }
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter project name" }}
             />
           )}
         />
@@ -94,6 +96,8 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
               fullWidth
               variant="filled"
               label="Description"
+              multiline
+              maxRows={4}
               onChange={(e) => field.handleChange(e.target.value)}
               value={field.state.value}
               error={field.state.meta.isTouched && !!field.state.meta.errors[0]}
@@ -102,6 +106,7 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
                 field.state.meta.errors[0]?.message
               }
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter project description" }}
             />
           )}
         />
@@ -115,6 +120,7 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
                 size="medium"
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
+                inputProps={{ "aria-label": "Select project status" }}
               >
                 {Object.values(ProjectStatus)
                   .filter((value) => typeof value === "number")
@@ -144,6 +150,7 @@ export default function CreateProjectForm(props: CreateProjectFormProps) {
               }
               type="number"
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter estimated project cost" }}
             />
           )}
         />

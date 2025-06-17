@@ -27,7 +27,7 @@ export const DashboardTable = (props: DashboardProps) => {
   const navigate = useNavigate();
 
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" role="region" aria-label="Recent projects">
       <CardContent>
         <Typography variant="h6" component="h2" gutterBottom sx={{ mb: 2 }}>
           Recent Projects
@@ -44,6 +44,7 @@ export const DashboardTable = (props: DashboardProps) => {
                   to: "/projects",
                 })
               }
+              aria-label="Navigate to view all projects"
             />
           </Grid>
           <Grid>
@@ -58,6 +59,7 @@ export const DashboardTable = (props: DashboardProps) => {
                   search: { associated: currentUser.ID },
                 })
               }
+              aria-label="Navigate to view projects you are associated with"
             />
           </Grid>
           <Grid>
@@ -72,6 +74,7 @@ export const DashboardTable = (props: DashboardProps) => {
                   search: { createdBy: currentUser.ID },
                 })
               }
+              aria-label="Navigate to view projects you created"
             />
           </Grid>
         </Grid>
@@ -83,8 +86,10 @@ export const DashboardTable = (props: DashboardProps) => {
               minWidth: { xs: 600, sm: 650 },
             },
           }}
+          role="region"
+          aria-label="Recent projects table"
         >
-          <Table>
+          <Table aria-label="Recent projects list">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
@@ -125,15 +130,17 @@ export const DashboardTable = (props: DashboardProps) => {
                     }
                   }}
                   key={row.ID}
-                  sx={{ 
+                  sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     "&:focus": {
                       backgroundColor: "action.hover",
                       outline: "2px solid",
                       outlineColor: "primary.main",
-                      outlineOffset: "-2px"
-                    }
+                      outlineOffset: "-2px",
+                    },
                   }}
+                  role="button"
+                  aria-label={`View project ${row.Name} details`}
                 >
                   <TableCell
                     component="th"

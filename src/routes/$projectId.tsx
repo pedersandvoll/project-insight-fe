@@ -73,6 +73,8 @@ function RouteComponent() {
         justifyContent="center"
         alignItems="center"
         minHeight="400px"
+        role="status"
+        aria-label="Loading project details"
       >
         <CircularProgress />
       </Box>
@@ -101,6 +103,8 @@ function RouteComponent() {
         minHeight: "100vh",
         backgroundColor: theme.palette.grey[50],
       }}
+      role="main"
+      aria-label="Project details page"
     >
       <Typography
         variant="h5"
@@ -127,6 +131,7 @@ function RouteComponent() {
                       status: event.target.value,
                     });
                   }}
+                  inputProps={{ "aria-label": "Update project status" }}
                 >
                   {Object.values(ProjectStatus)
                     .filter((value) => typeof value === "number")
@@ -163,6 +168,7 @@ function RouteComponent() {
                   textTransform: "none",
                   borderColor: "#C4C4C4",
                 }}
+                aria-label="Open add budget entry dialog"
               >
                 Add Budget Entry
               </Button>
@@ -260,6 +266,7 @@ function RouteComponent() {
                     startAngle={-110}
                     endAngle={110}
                     text={({ value }) => `${value}%`}
+                    aria-label={`Budget usage gauge showing ${data.EstimatedCost > 0 ? Math.round(((data.Budgets.length > 0 ? data.Budgets.reduce((sum, item) => sum + item.BudgetUsed, 0) : 0) / data.EstimatedCost) * 100) : 0}% of budget used`}
                     sx={(theme) => {
                       const percentage =
                         data.EstimatedCost > 0
@@ -307,8 +314,11 @@ function RouteComponent() {
               }
               maxWidth="sm"
               fullWidth
+              aria-labelledby="update-budget-dialog-title"
             >
-              <DialogTitle>Add Budget Entry</DialogTitle>
+              <DialogTitle id="update-budget-dialog-title">
+                Add Budget Entry
+              </DialogTitle>
               <DialogContent>
                 <BudgetForm
                   refetch={refetch}
@@ -347,6 +357,7 @@ function RouteComponent() {
                   textTransform: "none",
                   borderColor: "#C4C4C4",
                 }}
+                aria-label="Open assign user to project dialog"
               >
                 Assign user to project
               </Button>
@@ -359,8 +370,10 @@ function RouteComponent() {
                   minWidth: { xs: 600, sm: 650 },
                 },
               }}
+              role="region"
+              aria-label="Project team members table"
             >
-              <Table>
+              <Table aria-label="Project team members list">
                 <TableHead>
                   <TableRow>
                     <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
@@ -426,8 +439,11 @@ function RouteComponent() {
               }
               maxWidth="sm"
               fullWidth
+              aria-labelledby="assign-user-dialog-title"
             >
-              <DialogTitle>Assign user</DialogTitle>
+              <DialogTitle id="assign-user-dialog-title">
+                Assign user
+              </DialogTitle>
               <DialogContent>
                 <AssignUserForm
                   refetch={refetch}

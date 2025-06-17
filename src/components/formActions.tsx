@@ -10,7 +10,11 @@ export const FormActions = (props: FormActionProps) => {
 
   return (
     <Stack direction="row">
-      <Button onClick={onCancel} sx={{ textTransform: "none" }}>
+      <Button
+        onClick={onCancel}
+        sx={{ textTransform: "none" }}
+        aria-label="Cancel form"
+      >
         Cancel
       </Button>
       <Button
@@ -19,6 +23,7 @@ export const FormActions = (props: FormActionProps) => {
         loadingPosition="start"
         loading={isLoading}
         sx={{ textTransform: "none" }}
+        aria-label={isLoading ? "Saving changes" : "Save changes"}
       >
         Save
       </Button>

@@ -32,7 +32,12 @@ export const Dashboard = (props: DashboardProps) => {
 
       <Grid container spacing={{ xs: 2, sm: 3 }}>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card variant="outlined" sx={{ height: "100%" }}>
+          <Card
+            variant="outlined"
+            sx={{ height: "100%" }}
+            role="region"
+            aria-label="Total projects metric"
+          >
             <CardContent>
               <Typography
                 variant="subtitle1"
@@ -48,7 +53,12 @@ export const Dashboard = (props: DashboardProps) => {
           </Card>
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card variant="outlined" sx={{ height: "100%" }}>
+          <Card
+            variant="outlined"
+            sx={{ height: "100%" }}
+            role="region"
+            aria-label="Estimated budget metric"
+          >
             <CardContent>
               <Typography
                 variant="subtitle1"
@@ -64,7 +74,12 @@ export const Dashboard = (props: DashboardProps) => {
           </Card>
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card variant="outlined" sx={{ height: "100%" }}>
+          <Card
+            variant="outlined"
+            sx={{ height: "100%" }}
+            role="region"
+            aria-label="Used budget metric"
+          >
             <CardContent>
               <Typography
                 variant="subtitle1"
@@ -81,7 +96,12 @@ export const Dashboard = (props: DashboardProps) => {
         </Grid>
 
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <Card variant="outlined" sx={{ height: "100%" }}>
+          <Card
+            variant="outlined"
+            sx={{ height: "100%" }}
+            role="region"
+            aria-label="Budget utilization gauge"
+          >
             <CardContent
               sx={{
                 display: "flex",
@@ -113,6 +133,7 @@ export const Dashboard = (props: DashboardProps) => {
                   startAngle={-110}
                   endAngle={110}
                   text={({ value }) => `${value}%`}
+                  aria-label={`Budget utilization gauge showing ${budgetPercentage}% utilization`}
                   sx={(theme) => ({
                     [`& .MuiGauge-valueText`]: {
                       fontSize: { xs: "1.2rem", md: "1.5rem" },
@@ -144,7 +165,12 @@ export const Dashboard = (props: DashboardProps) => {
         </Grid>
 
         <Grid size={{ xs: 12, md: 8 }}>
-          <Card variant="outlined" sx={{ height: "100%" }}>
+          <Card
+            variant="outlined"
+            sx={{ height: "100%" }}
+            role="region"
+            aria-label="Projects by status"
+          >
             <CardContent>
               <Typography variant="h6" component="h2" gutterBottom>
                 Projects by Status
@@ -165,6 +191,7 @@ export const Dashboard = (props: DashboardProps) => {
                           search: { status: [statusData.status.toString()] },
                         })
                       }
+                      aria-label={`Filter projects by ${getStatusLabel(statusData.status)} status (${statusData.count} projects)`}
                       sx={{
                         width: "100%",
                         justifyContent: "flex-start",

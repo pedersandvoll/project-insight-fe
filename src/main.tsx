@@ -28,9 +28,8 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          {/** <RouterProvider router={router} /> **/}
           <AppRouterProvider />
-          <ReactQueryDevtools />
+          {import.meta.env.DEV && <ReactQueryDevtools />}
         </AuthProvider>
       </QueryClientProvider>
     </StrictMode>,

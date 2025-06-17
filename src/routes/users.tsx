@@ -47,6 +47,8 @@ function UsersPage() {
         justifyContent="center"
         alignItems="center"
         minHeight="400px"
+        role="status"
+        aria-label="Loading users"
       >
         <CircularProgress />
       </Box>
@@ -71,6 +73,8 @@ function UsersPage() {
         minHeight: "100vh",
         backgroundColor: theme.palette.grey[50],
       }}
+      role="main"
+      aria-label="Users page"
     >
       <Typography
         variant="h5"
@@ -98,6 +102,7 @@ function UsersPage() {
                     replace: true,
                   });
                 }}
+                inputProps={{ "aria-label": "Filter users by role" }}
               >
                 {Object.values(UserRole)
                   .filter((value) => typeof value === "number")
@@ -117,8 +122,10 @@ function UsersPage() {
                 minWidth: { xs: 600, sm: 650 },
               },
             }}
+            role="region"
+            aria-label="Users table"
           >
-            <Table>
+            <Table aria-label="Users list">
               <TableHead>
                 <TableRow>
                   <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>

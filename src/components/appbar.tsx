@@ -36,11 +36,12 @@ export const Appbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" role="banner">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Button
           onClick={() => navigate({ to: "/" })}
           sx={{ padding: 0, textTransform: "none" }}
+          aria-label="Navigate to home page"
         >
           <Typography variant="h6" component="div" sx={{ color: "white" }}>
             Project Insights
@@ -57,7 +58,7 @@ export const Appbar = () => {
                 alignItems="center"
                 sx={{ ml: "auto" }}
               >
-                <IconButton onClick={handleMenu}>
+                <IconButton onClick={handleMenu} aria-label="Open user menu">
                   <Avatar
                     {...stringAvatar(`${data.FirstName} ${data.LastName}`)}
                   />
@@ -72,11 +73,20 @@ export const Appbar = () => {
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={handleClose}
+              aria-label="User menu"
             >
-              <MenuItem onClick={() => navigate({ to: "/users" })}>
+              <MenuItem
+                onClick={() => navigate({ to: "/users" })}
+                aria-label="Navigate to users page"
+              >
                 Users
               </MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              <MenuItem
+                onClick={handleLogout}
+                aria-label="Logout from application"
+              >
+                Logout
+              </MenuItem>
             </Menu>
           </>
         )}

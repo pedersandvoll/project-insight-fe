@@ -79,6 +79,7 @@ function ProjectsPage() {
     name,
     createdBy,
     associated,
+    newProject,
   });
   const { data: usersData, isLoading: usersLoading } = useGetUsers();
 
@@ -89,6 +90,8 @@ function ProjectsPage() {
         justifyContent="center"
         alignItems="center"
         minHeight="400px"
+        role="status"
+        aria-label="Loading projects"
       >
         <CircularProgress />
       </Box>
@@ -113,6 +116,8 @@ function ProjectsPage() {
         minHeight: "100vh",
         backgroundColor: theme.palette.grey[50],
       }}
+      role="main"
+      aria-label="Projects page"
     >
       <Typography
         variant="h5"
@@ -126,7 +131,7 @@ function ProjectsPage() {
         <CardContent>
           <Grid container spacing={1}>
             <Grid>
-              <form>
+              <form aria-label="Search projects by name">
                 <form.Field
                   name="name"
                   children={(field) => (
@@ -134,6 +139,7 @@ function ProjectsPage() {
                       label="Search..."
                       value={field.state.value}
                       onChange={(e) => field.handleChange(e.target.value)}
+                      inputProps={{ "aria-label": "Search projects by name" }}
                     />
                   )}
                 />
@@ -157,6 +163,7 @@ function ProjectsPage() {
                       replace: true,
                     });
                   }}
+                  inputProps={{ "aria-label": "Filter projects by status" }}
                 >
                   {Object.values(ProjectStatus)
                     .filter((value) => typeof value === "number")
@@ -188,7 +195,14 @@ function ProjectsPage() {
                   }}
                   sx={{ width: 150 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Created by" />
+                    <TextField
+                      {...params}
+                      label="Created by"
+                      inputProps={{
+                        ...params.inputProps,
+                        "aria-label": "Filter projects by creator",
+                      }}
+                    />
                   )}
                 />
               </Grid>
@@ -213,7 +227,14 @@ function ProjectsPage() {
                   }}
                   sx={{ width: 150 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Associated" />
+                    <TextField
+                      {...params}
+                      label="Associated"
+                      inputProps={{
+                        ...params.inputProps,
+                        "aria-label": "Filter projects by associated user",
+                      }}
+                    />
                   )}
                 />
               </Grid>
@@ -234,6 +255,7 @@ function ProjectsPage() {
                   height: "56px",
                   textTransform: "none",
                 }}
+                aria-label="Open create new project dialog"
               >
                 Create new project
               </Button>
@@ -252,8 +274,11 @@ function ProjectsPage() {
             }
             maxWidth="sm"
             fullWidth
+            aria-labelledby="create-project-dialog-title"
           >
-            <DialogTitle>Create new project</DialogTitle>
+            <DialogTitle id="create-project-dialog-title">
+              Create new project
+            </DialogTitle>
             <DialogContent>
               <CreateProjectForm refetch={refetch} />
             </DialogContent>
@@ -267,8 +292,10 @@ function ProjectsPage() {
                 minWidth: { xs: 600, sm: 650 },
               },
             }}
+            role="region"
+            aria-label="Projects table"
           >
-            <Table>
+            <Table aria-label="Projects list">
               <TableHead>
                 <TableRow>
                   <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
@@ -318,15 +345,17 @@ function ProjectsPage() {
                       }
                     }}
                     key={row.ID}
-                    sx={{ 
+                    sx={{
                       "&:last-child td, &:last-child th": { border: 0 },
                       "&:focus": {
                         backgroundColor: "action.hover",
                         outline: "2px solid",
                         outlineColor: "primary.main",
-                        outlineOffset: "-2px"
-                      }
+                        outlineOffset: "-2px",
+                      },
                     }}
+                    role="button"
+                    aria-label={`View project ${row.Name} details`}
                   >
                     <TableCell
                       component="th"

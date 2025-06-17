@@ -29,6 +29,7 @@ export default function RegisterForm() {
         e.stopPropagation();
         form.handleSubmit();
       }}
+      aria-label="Registration form"
     >
       <Stack
         gap={2}
@@ -62,6 +63,7 @@ export default function RegisterForm() {
                 }
                 type="email"
                 sx={{ minWidth: "400px" }}
+                inputProps={{ "aria-label": "Enter your email address" }}
               />
             </>
           )}
@@ -81,6 +83,7 @@ export default function RegisterForm() {
                 field.state.meta.errors[0]?.message
               }
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter your first name" }}
             />
           )}
         />
@@ -99,6 +102,7 @@ export default function RegisterForm() {
                 field.state.meta.errors[0]?.message
               }
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter your last name" }}
             />
           )}
         />
@@ -118,6 +122,7 @@ export default function RegisterForm() {
               }
               type="password"
               sx={{ minWidth: "400px" }}
+              inputProps={{ "aria-label": "Enter your password" }}
             />
           )}
         />
@@ -130,6 +135,9 @@ export default function RegisterForm() {
               variant="contained"
               fullWidth
               sx={{ textTransform: "none" }}
+              aria-label={
+                isSubmitting ? "Creating account" : "Create your account"
+              }
             >
               {isSubmitting ? "..." : "Register"}
             </Button>
@@ -140,6 +148,7 @@ export default function RegisterForm() {
           <Button
             sx={{ textTransform: "none" }}
             onClick={() => navigate({ to: "/login" })}
+            aria-label="Navigate to login page"
           >
             Login
           </Button>
