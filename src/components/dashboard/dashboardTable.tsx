@@ -109,14 +109,31 @@ export const DashboardTable = (props: DashboardProps) => {
               {data.RecentProjects.map((row) => (
                 <TableRow
                   hover
+                  tabIndex={0}
                   onClick={() =>
                     navigate({
                       to: "/$projectId",
                       params: { projectId: row.ID },
                     })
                   }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      navigate({
+                        to: "/$projectId",
+                        params: { projectId: row.ID },
+                      });
+                    }
+                  }}
                   key={row.ID}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{ 
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    "&:focus": {
+                      backgroundColor: "action.hover",
+                      outline: "2px solid",
+                      outlineColor: "primary.main",
+                      outlineOffset: "-2px"
+                    }
+                  }}
                 >
                   <TableCell
                     component="th"
