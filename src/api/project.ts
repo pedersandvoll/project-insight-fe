@@ -18,9 +18,9 @@ const addArrayParam = (
   key: string,
   values: string[],
 ) => {
-  values.forEach((value) => {
-    params.append(key, value);
-  });
+  if (values.length > 0) {
+    params.set(key, values.join(","));
+  }
 };
 
 export async function getProjectDashboard() {
